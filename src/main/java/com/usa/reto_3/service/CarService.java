@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -19,19 +20,28 @@ public class CarService {
     }
 
     public void crear(CarModel car){
-        if(!carRepository.existsById(car.getIdCar())){
-            carRepository.save(car);
-        }
-    }
+        if(!carRepository.existsById(car.getIdCar())){carRepository.save(car);}}
 
-    public void actualizar(CarModel car){
-        if (carRepository.existsById(car.getIdCar())) {
-            CarModel carActual = carRepository.findById(car.getIdCar()).get();
-            carActual.setName(car.getName());
-            carActual.setBrand(car.getBrand());
-            carActual.setYear(car.getYear());
-            carActual.setDescription(car.getDescription());
-            carRepository.save(car);
+    public CarModel actualizar(CarModel car) {
+        if( carRepository.existsById(car.getIdCar())) {
+            Optional<CarModel> e= carRepository.findById(car.getIdCar());
+            if(e.isPresent()) {
+                if(car.getName()!=null) {
+                    e.get().setName(car.getName());
+                }
+                if(car.getBrand()!=null) {
+                    e.get().setBrand(car.getBrand());
+                }
+                if(Long.valueOf(car.getYear()) == null) {
+                    e.get().setYear(car.getYear());
+                }
+                carRepository. save(e.get());
+                return e.get();
+            }else{
+                return car;
+            }
+        }else{
+            return car;
         }
     }
 

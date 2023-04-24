@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GamaService {
@@ -23,12 +24,23 @@ public class GamaService {
         }
     }
 
-    public void actualizar(GamaModel gama) {
-        if(gamaRepository.existsById(gama.getIdGama())) {
-            GamaModel gamaActual = gamaRepository.findById(gama.getIdGama()).get();
-            gamaActual.setDescription(gama.getDescription());
-            gamaActual.setName(gama.getName());
-            gamaRepository.save(gama);
+    public GamaModel actualizar(GamaModel gama) {
+        if( gamaRepository.existsById(gama.getIdGama())) {
+            Optional<GamaModel> e= gamaRepository.findById(gama.getIdGama());
+            if(e.isPresent()) {
+                if(gama.getName()!=null) {
+                    e.get().setName(gama.getName());
+                }
+                if(gama.getDescription()!=null) {
+                    e.get().setDescription(gama.getDescription());
+                }
+                gamaRepository. save(e.get());
+                return e.get();
+            }else{
+                return gama;
+            }
+        }else{
+            return gama;
         }
     }
 

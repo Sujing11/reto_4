@@ -22,9 +22,7 @@ public class CarController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public void crear(@RequestBody CarModel car){
-        carService.crear(car);
-    }
+    public void crear(@RequestBody CarModel car){carService.crear(car);}
 
     @PutMapping("/update")
     public void actualizar(@RequestBody CarModel car){

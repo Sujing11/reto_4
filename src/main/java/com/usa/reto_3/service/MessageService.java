@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessageService {
@@ -24,11 +25,20 @@ public class MessageService {
         }
     }
 
-    public void actualizar(MessageModel message){
-        if (messageRepository.existsById(message.getIdMessage())) {
-            MessageModel messageActual = messageRepository.findById(message.getIdMessage()).get();
-            messageActual.setMessageText(message.getMessageText());
-            messageRepository.save(message);
+    public MessageModel actualizar(MessageModel message) {
+        if( messageRepository.existsById(message.getIdMessage())) {
+            Optional<MessageModel> e= messageRepository.findById(message.getIdMessage());
+            if(e.isPresent()) {
+                if(message.getMessageText()!=null) {
+                    e.get().setMessageText(message.getMessageText());
+                }
+                messageRepository. save(e.get());
+                return e.get();
+            }else{
+                return message;
+            }
+        }else{
+            return message;
         }
     }
 

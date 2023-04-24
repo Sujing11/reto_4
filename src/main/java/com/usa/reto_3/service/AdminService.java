@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -17,18 +18,29 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
-    public String crear(AdminModel admin){
+    public void crear(AdminModel admin){
         if (!adminRepository.existsById(admin.getIdAdmin())){
-            return "El usuario ya existe";
-        }else{
             adminRepository.save(admin);
-            return "La usuario se creo";
         }
     }
 
-    public void actualizar(AdminModel admin){
-        if (adminRepository.existsById(admin.getIdAdmin())) {
-            adminRepository.save(admin);
+    public AdminModel actualizar(AdminModel admin) {
+        if( adminRepository.existsById(admin.getIdAdmin())) {
+            Optional<AdminModel> e= adminRepository.findById(admin.getIdAdmin());
+            if(e.isPresent()) {
+                if(admin.getName()!=null) {
+                    e.get().setName(admin.getName());
+                }
+                if(admin.getPassword()!=null) {
+                    e.get().setPassword(admin.getPassword());
+                }
+                adminRepository. save(e.get());
+                return e.get();
+            }else{
+                return admin;
+            }
+        }else{
+            return admin;
         }
     }
 

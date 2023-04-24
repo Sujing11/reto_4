@@ -22,8 +22,6 @@ public class AdminModel {
     private String email;
     @Column(length = 45)
     private String password;
-    @Column(length = 3)
-    private byte age;
     @Column(length = 250)
     private String name;
 }
