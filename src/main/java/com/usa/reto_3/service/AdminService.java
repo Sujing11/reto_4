@@ -18,6 +18,10 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
+    public Optional<AdminModel> obtenerPorId(int id) {
+        return adminRepository. findById(id);
+    }
+
     public void crear(AdminModel admin){
         if (!adminRepository.existsById(admin.getIdAdmin())){
             adminRepository.save(admin);

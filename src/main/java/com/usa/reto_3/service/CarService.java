@@ -1,10 +1,13 @@
 package com.usa.reto_3.service;
 
 import com.usa.reto_3.model.CarModel;
-import com.usa.reto_3.model.ClientModel;
 import com.usa.reto_3.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +20,10 @@ public class CarService {
 
     public List<CarModel> obtener(){
         return carRepository.findAll();
+    }
+
+    public Optional<CarModel> obtenerPorId(int id) {
+        return carRepository.findById(id);
     }
 
     public void crear(CarModel car){

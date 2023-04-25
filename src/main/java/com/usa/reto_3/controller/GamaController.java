@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Gama")
+@CrossOrigin(value = "*")
 public class GamaController {
 
     @Autowired
@@ -18,6 +20,11 @@ public class GamaController {
     @GetMapping("/all")
     public List<GamaModel> obtener(){
         return gamaService.obtener();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<GamaModel> obtenerPorId(@PathVariable int id) {
+        return gamaService.obtenerPorId(id);
     }
 
     @PostMapping("/save")
@@ -31,6 +38,7 @@ public class GamaController {
         gamaService.actualizar(gama);}
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable("id")int id){
         gamaService. eliminar(id);
     }

@@ -18,6 +18,9 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
+    public Optional<MessageModel> obtenerPorId(int id) {
+        return messageRepository. findById(id);
+    }
 
     public void crear(MessageModel message){
         if(!messageRepository.existsById(message.getIdMessage())) {

@@ -18,6 +18,10 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public Optional<ClientModel> obtenerPorId(int id) {
+        return clientRepository. findById(id);
+    }
+
     public void crear(ClientModel client) {
         if (!clientRepository.existsById(client.getIdClient())) {
             clientRepository.save(client);
@@ -50,4 +54,5 @@ public class ClientService {
     public void eliminar(int id) {
         clientRepository.deleteById(id);
     }
+
 }

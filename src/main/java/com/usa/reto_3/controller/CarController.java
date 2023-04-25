@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Car")
+@CrossOrigin(value = "*")
 public class CarController {
 
     @Autowired
@@ -20,15 +22,24 @@ public class CarController {
         return carService.obtener();
     }
 
+    @GetMapping("/{id}")
+    public Optional<CarModel> obtenerPorId(@PathVariable int id) {
+        return carService.obtenerPorId(id);
+    }
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public void crear(@RequestBody CarModel car){carService.crear(car);}
+    public void crear(@RequestBody CarModel car){
+        carService.crear(car);
+    }
 
     @PutMapping("/update")
     public void actualizar(@RequestBody CarModel car){
-        carService.actualizar(car);}
+        carService.actualizar(car);
+    }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable int id){
         carService. eliminar(id);
     }

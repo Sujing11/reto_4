@@ -28,8 +28,8 @@ public class CarModel {
     @Column(length = 250)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_gama", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_gama")
     @JsonIgnoreProperties("cars")
     private GamaModel gama;
 

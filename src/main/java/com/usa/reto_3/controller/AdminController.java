@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Admin")
+@CrossOrigin(value = "*")
 public class AdminController {
 
     @Autowired
@@ -18,6 +20,11 @@ public class AdminController {
     @GetMapping("/all")
     public List<AdminModel> obtener(){
         return adminService.obtener();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<AdminModel> obtenerPorId(@PathVariable("id") int id) {
+        return adminService.obtenerPorId(id);
     }
 
     @PostMapping("/save")

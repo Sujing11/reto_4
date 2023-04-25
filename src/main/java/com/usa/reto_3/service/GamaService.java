@@ -18,6 +18,10 @@ public class GamaService {
         return gamaRepository.findAll();
     }
 
+    public Optional<GamaModel> obtenerPorId(int id) {
+        return gamaRepository. findById(id);
+    }
+
     public void crear(GamaModel gama){
         if (!gamaRepository.existsById(gama.getIdGama())) {
             gamaRepository.save(gama);

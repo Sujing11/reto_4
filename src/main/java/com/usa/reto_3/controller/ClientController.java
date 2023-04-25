@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Client")
+@CrossOrigin(value = "*")
 public class ClientController {
 
     @Autowired
@@ -18,6 +20,11 @@ public class ClientController {
     @GetMapping("/all")
     public List<ClientModel> obtener(){
         return clientService.obtener();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<ClientModel> obtenerPorId(@PathVariable int id) {
+        return clientService.obtenerPorId(id);
     }
 
     @PostMapping("/save")
@@ -31,6 +38,7 @@ public class ClientController {
         clientService.actualizar(client);}
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable("id")int id){
         clientService. eliminar(id);
     }
