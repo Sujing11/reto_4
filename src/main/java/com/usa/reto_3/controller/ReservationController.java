@@ -33,6 +33,7 @@ public class ReservationController {
     }
 
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public void actualizar(@RequestBody ReservationModel reservation){
         reservationService. actualizar(reservation);}
 
