@@ -33,6 +33,7 @@ public class MessageController {
     }
 
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public void actualizar(@RequestBody MessageModel message){
         messageService.actualizar(message);}
 
