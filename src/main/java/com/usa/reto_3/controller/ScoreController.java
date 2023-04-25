@@ -33,6 +33,7 @@ public class ScoreController {
     }
 
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public void actualizar(@RequestBody ScoreModel score){
         scoreService.actualizar(score);}
 
