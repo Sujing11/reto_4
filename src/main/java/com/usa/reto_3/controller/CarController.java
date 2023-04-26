@@ -1,5 +1,6 @@
 package com.usa.reto_3.controller;
 
+import com.usa.reto_3.dbo.CarDbo;
 import com.usa.reto_3.model.CarModel;
 import com.usa.reto_3.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class CarController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public void actualizar(@RequestBody CarModel car){
-        carService.actualizar(car);
+    public void actualizar(@RequestBody CarDbo carInput){
+        carService.actualizar(carInput);
     }
 
     @DeleteMapping("/{id}")

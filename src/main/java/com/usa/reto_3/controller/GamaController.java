@@ -40,7 +40,7 @@ public class GamaController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void eliminar(@PathVariable("id")int id){
+    public void eliminar(@PathVariable int id){
         gamaService. eliminar(id);
     }
 

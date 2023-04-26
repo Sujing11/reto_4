@@ -28,7 +28,7 @@ public class GamaService {
         }
     }
 
-    public GamaModel actualizar(GamaModel gama) {
+    public void actualizar(GamaModel gama) {
         if( gamaRepository.existsById(gama.getIdGama())) {
             Optional<GamaModel> e= gamaRepository.findById(gama.getIdGama());
             if(e.isPresent()) {
@@ -39,12 +39,7 @@ public class GamaService {
                     e.get().setDescription(gama.getDescription());
                 }
                 gamaRepository. save(e.get());
-                return e.get();
-            }else{
-                return gama;
             }
-        }else{
-            return gama;
         }
     }
 

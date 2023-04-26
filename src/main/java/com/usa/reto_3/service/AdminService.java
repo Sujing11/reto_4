@@ -38,7 +38,7 @@ public class AdminService {
                 if(admin.getPassword()!=null) {
                     e.get().setPassword(admin.getPassword());
                 }
-                adminRepository. save(e.get());
+                adminRepository.save(e.get());
                 return e.get();
             }else{
                 return admin;
@@ -51,4 +51,5 @@ public class AdminService {
     public void eliminar(int id) {
         adminRepository.deleteById(id);
     }
+
 }

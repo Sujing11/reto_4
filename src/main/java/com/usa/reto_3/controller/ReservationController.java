@@ -1,5 +1,6 @@
 package com.usa.reto_3.controller;
 
+import com.usa.reto_3.dbo.ReservationDbo;
 import com.usa.reto_3.model.ReservationModel;
 import com.usa.reto_3.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,13 @@ public class ReservationController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public void actualizar(@RequestBody ReservationModel reservation){
-        reservationService. actualizar(reservation);}
+    public void actualizar(@RequestBody ReservationDbo reservationInput){
+        reservationService.actualizar(reservationInput);}
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void eliminar(@PathVariable("id")int id){
-        reservationService. eliminar(id);
+    public void eliminar(@PathVariable int id){
+        reservationService.eliminar(id);
     }
 
 }

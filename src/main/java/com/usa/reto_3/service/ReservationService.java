@@ -1,5 +1,6 @@
 package com.usa.reto_3.service;
 
+import com.usa.reto_3.dbo.ReservationDbo;
 import com.usa.reto_3.model.ReservationModel;
 import com.usa.reto_3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,16 @@ public class ReservationService {
             reservationRepository.save(reservation);
         }
     }
-    public void actualizar(ReservationModel reservation){
-        if (reservationRepository.existsById(reservation.getIdReservation())) {
-            ReservationModel message = reservationRepository.findById(reservation.getIdReservation()).get();
-            message.setStartDate(reservation.getStartDate());
-            message.setDevolutionDate(reservation.getDevolutionDate());
-            message.setStatus("upgated");
+    public void actualizar(ReservationDbo reservationInput) {
+        Optional<ReservationModel> reservationDb = reservationRepository.findById(reservationInput.getIdReservation());
+        if(reservationDb.isPresent()){
+            ReservationModel reservation = reservationDb.get();
+            if (reservationInput.getStartDate() != null){
+                reservation.setStartDate(reservationInput.getStartDate());
+            }
+            if (reservationInput.getDevolutionDate() != null){
+                reservation.setDevolutionDate(reservationInput.getDevolutionDate());
+            }
             reservationRepository.save(reservation);
         }
     }

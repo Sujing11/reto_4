@@ -1,5 +1,6 @@
 package com.usa.reto_3.controller;
 
+import com.usa.reto_3.dbo.ClientDbo;
 import com.usa.reto_3.model.ClientModel;
 import com.usa.reto_3.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,13 @@ public class ClientController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public void actualizar(@RequestBody ClientModel client){
-        clientService.actualizar(client);}
+    public void actualizar(@RequestBody ClientDbo clientInput){
+        clientService.actualizar(clientInput);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void eliminar(@PathVariable("id")int id){
+    public void eliminar(@PathVariable int id){
         clientService. eliminar(id);
     }
 

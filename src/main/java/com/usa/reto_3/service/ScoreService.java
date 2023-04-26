@@ -19,7 +19,7 @@ public class ScoreService {
     }
 
     public Optional<ScoreModel> obtenerPorId(int id) {
-        return scoreRepository. findById(id);
+        return scoreRepository.findById(id);
     }
 
     public void crear(ScoreModel score){

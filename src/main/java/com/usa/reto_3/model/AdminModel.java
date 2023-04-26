@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "admin")
@@ -24,4 +23,5 @@ public class AdminModel {
     private String password;
     @Column(length = 250)
     private String name;
+
 }

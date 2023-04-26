@@ -1,5 +1,6 @@
 package com.usa.reto_3.service;
 
+import com.usa.reto_3.dbo.ClientDbo;
 import com.usa.reto_3.model.ClientModel;
 import com.usa.reto_3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,26 +29,23 @@ public class ClientService {
         }
     }
 
-    public ClientModel actualizar(ClientModel client) {
-        if( clientRepository.existsById(client.getIdClient())) {
-            Optional<ClientModel> e= clientRepository.findById(client.getIdClient());
-            if(e.isPresent()) {
-                if(client.getName()!=null) {
-                    e.get().setName(client.getName());
-                }
-                if(Byte.valueOf(client.getAge())!=null) {
-                    e.get().setAge(client.getAge());
-                }
-                if(client.getPassword()!=null) {
-                    e.get().setPassword(client.getPassword());
-                }
-                clientRepository. save(e.get());
-                return e.get();
-            }else{
-                return client;
+    public void actualizar(ClientDbo clientInput) {
+        Optional<ClientModel> clientDb = clientRepository.findById(clientInput.getIdClient());
+        if(clientDb.isPresent()){
+            ClientModel client = clientDb.get();
+            if(clientInput.getAge() != null){
+                client.setAge(clientInput.getAge());
             }
-        }else{
-            return client;
+            if(clientInput.getName() != null){
+                client.setName(clientInput.getName());
+            }
+            if(clientInput.getEmail() != null){
+                client.setEmail(clientInput.getEmail());
+            }
+            if(clientInput.getPassword() != null){
+                client.setPassword(clientInput.getPassword());
+            }
+            clientRepository.save(client);
         }
     }
 
